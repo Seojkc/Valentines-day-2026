@@ -439,7 +439,7 @@
       width: clamp(260px, 78vw, 720px);
       height: auto;
       opacity: 0.92;
-      margin: 500px auto;
+      margin-top: 500px ;
       filter: drop-shadow(0 14px 30px rgba(0,0,0,.35));
     }
     .namecard{
@@ -459,7 +459,7 @@
     }
 
     .stickerGrid img{
-    width: 25%;
+    width: 60%;
     height: auto;
     opacity: 0;
     transform: scale(.6) rotate(var(--rot, 0deg));
@@ -1005,7 +1005,7 @@ I choose you. Today. Tomorrow. Always.
           const x = 10 + Math.random() * 80;
           const y = 12 + Math.random() * 62;
 
-          const scale = (2 + Math.random() * 2).toFixed(2); // 0.8–2.0 (nice on phone)
+          const scale = (3 + Math.random() * 2).toFixed(2); // 0.8–2.0 (nice on phone)
           const rot = `${Math.floor((Math.random() - 0.5) * 80)}deg`;
 
           kiss.style.left = `${x}vw`;
