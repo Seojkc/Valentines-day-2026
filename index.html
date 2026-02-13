@@ -1,250 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Timeline ❤️</title>
-    <style>
-        :root {
-            --primary: #ff3366;
-            --secondary: #ff758c;
-            --bg: #1a1a1a;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--bg);
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .heading{
-            color: white;
-            text-align: center;
-            padding: 20px;
-            z-index: 100;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.534);;
-
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 50px 20px;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            transform: translateX(-50%);
-            box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
-        }
-
-        .card {
-            position: relative;
-            width: 45%;
-            padding: 25px;
-            margin: 50px 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 0.8s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .card:nth-child(even) {
-            margin-left: 55%;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary);
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        .card:nth-child(odd)::before {
-            right: -65px;
-        }
-
-        .card:nth-child(even)::before {
-            left: -65px;
-        }
-
-        .date {
-            color: var(--primary);
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-        }
-
-        .emoji {
-            font-size: 3em;
-            margin: 15px 0;
-            filter: drop-shadow(0 0 5px rgba(255, 51, 102, 0.5));
-        }
-
-        .description {
-            color: white;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        .card.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .card {
-                width: 90%;
-                margin-left: 10% !important;
-            }
-
-            .card::before {
-                left: -45px !important;
-                right: auto !important;
-            }
-
-            .timeline-line {
-                left: 35px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1 class="heading">
-        Happy Valentine's Day Amaldakutti  </h1>
-    <div class="timeline">
-        <div class="timeline-line"></div>
-        <div id="cards-container"></div>
-    </div>
-
-    <script>
-        const timelineData = [
-
-            {
-                date: "Day One",
-                emoji: "💬",
-                desc: "I don’t know who started our first conversation 🤔💬—we’re still debating that 😆—but after those casual chats, I found myself falling in love with every word you said 💕. The thought of having you by my side forever, listening to my stories 📖💑, felt so right, and when I finally confessed my feelings 💖, it wasn’t childish or accidental—it was the most mature and heartfelt decision of my life ❤️✨."
-            },
-            {
-                date: "Nov 23, 2023 ❤️",
-                emoji: "🌹",
-                desc: "The day I proposed to you, my hands trembled 😰, my heart raced 💓, and I was completely panicked 😖—but it was worth every second 💍✨. You didn’t say yes 😅, but you didn’t say no either 😉—instead, you smiled 😊, held my hand 🤝, and whispered, “Let’s try this” 💕… and in that moment, my world felt perfect 🥰❤️."
-            },
-            {
-                date: "Dec 13, 2023 ❤️",
-                emoji: "💑",
-                desc: "After almost a month of heartfelt talks 🗣️💞, convincing each other that we could make it work despite the distance 🌍💑, you were still so worried—about your parents, our future, and whether love could truly bridge the miles 😔💭. But when you finally said yes 💍😭, my heart soared to a level of happiness I never knew existed, knowing that no matter what, we were in this together forever ❤️✨."
-            },
-            {
-                date: "Jan 15, 2024 ❤️",
-                emoji: "🔐",
-                desc: "The day you said you would keep all the chambers of your heart just for me 💖🔐, I felt like the luckiest soul in the universe ✨. In that moment, every fear faded, every doubt vanished, and I knew—my heart had finally found its forever home in you ❤️🏡."
-            },
-            {
-                date: "Jan 28, 2024 ❤️",
-                emoji: "✈️",
-                desc: "After the long wait, I finally traveled across the world ✈️❤️—all the way from Canada to Bangalore—just to see you. Sitting on a bench in your college, my heart pounded 💓, rehearsing a thousand ways to say my first words, but the moment you walked in, time itself seemed to stop ⏳✨—I had seen you countless times before, yet never this breathtakingly beautiful 😍.<br><br>You came closer and sat next to me 💕, and though neither of us remembers who spoke first or what was said, our conversation soon flowed naturally, as if our hearts had been waiting for this moment forever 💖. And in that magical first date, we both knew—we had done something truly right 🥰✨."
-            },
-            {
-                date: "Feb 11, 2024 ❤️",
-                emoji: "😘",
-                desc: " Our second date was calmer, yet one of the most unforgettable days of my life ❤️. Sitting beside you in the theater, watching <i>Premalu</i> 🎬, I found myself more captivated by you than the movie—your every smile 😊, the way you sat, the way you crossed your hands and gently leaned into me 💕.<br><br>And then, our first kiss happened—soft, magical, and filled with a feeling I had never known before 😘✨. I had asked for it, and though you didn’t say much, you didn’t refuse either… in that moment, I felt a love deeper than words could ever express ❤️🔥.  "
-            },
-            {
-                date: "Feb 11, 2024 ❤️",
-                emoji: "😘",
-                desc: " Our third date was the most special among the three, the one I cherished the most ❤️. This time, there was no stress, no nervousness—just us, talking freely, laughing effortlessly, and enjoying each other’s company like we’d been doing this forever 😊💬.<br><br>For the first time, you asked me to visit again 🥹, a simple request that meant everything to me. We talked for hours, kissed, hugged—things that usually happen in a different order, but we’ve never followed the usual path anyway 💕.<br><br>As my vacation ended, the goodbye was heavy 😔, but even through the sadness, we held onto our promises, knowing this was just the beginning of something forever ❤️✨. And though it's been a long time since these moments happened, I believe it’s always beautiful to look back and relive the days that made us who we are today 🥰💖. "
-            },
-            {
-                date: "Feb 14, 2025 💖",
-                emoji: "🕯️",
-                desc: "It’s been almost a year since we’ve seen each other, and it's not because I don’t want to, but because there are important things I need to do here that I can’t leave behind, and I know you understand that so well 💖. The understanding and care you’ve shown me is the most precious gift I could ever ask for, and no matter what I give, it will never compare to it 🌟.<br><br>During the struggles I’ve faced here, your calls and your presence have been the greatest comfort, bringing peace like nothing else 🕊️. I’ve never met a girl with such maturity, understanding, and care for me,like my  mother ❤️.<br><br>Your daily calls, even amidst your busy schedule, are the highlight of my day—sometimes I wait for those 10 minutes with so much eagerness, but every second of it is worth more than words can express ⏳💬. Every time you send me photos of you, it makes me so happy, and I feel like treasuring them forever, keeping them close to my heart 🖼️💘.<br><br>I don’t know how to thank you enough, but I promise you this: I will treat you like my little princess for a lifetime 👑💫. I really want to make today as romantic as possible for you, but due to the situation, I can’t—still, I’ll try my best to make it even more special next time, and always give you my best for a lifetime of love 💕✨."
-            },
-            {
-                date: "♾️💖",
-                emoji: "💫",
-                desc: "During this time, we’ve truly understood each other on a deeper level, celebrated festivals together 🎉, and done all the little cringe things that only we could enjoy 😆💖—every moment has been so beautiful, fun, and full of love. I hope this bond we share lasts forever, just as it always has, growing stronger with each passing day 🌱💞.<br><br>I look forward to all the new adventures life will bring us, and I can’t wait to share every moment, every joy, and all the fun together as we continue to build our future 💫❤️.<br><br>To infinity and beyond, my love 💫❤️—our journey together has no end, only endless moments of happiness, laughter, and memories that will last forever. You and I, bound by love, will keep growing stronger and more beautiful with each passing day, through all that life has to offer 💖🚀."
-            }
-        ];
-
-        function createCards() {
-            const container = document.getElementById('cards-container');
-            
-            timelineData.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = `card ${index % 2 === 0 ? '' : 'even'}`;
-                card.innerHTML = `
-                    <div class="date">${item.date}</div>
-                    <div class="emoji">${item.emoji}</div>
-                    <div class="description">${item.desc}</div>
-                `;
-                
-                container.appendChild(card);
-            });
-        }
-
-        function checkScroll() {
-            const cards = document.querySelectorAll('.card');
-            
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if(cardTop < window.innerHeight * 0.8) {
-                    card.classList.add('active');
-                }
-            });
-        }
-
-        // Initialize
-        createCards();
-        window.addEventListener('scroll', checkScroll);
-        window.addEventListener('load', checkScroll);
-
-        // Add floating hearts background
-        for(let i = 0; i < 50; i++) {
-            const heart = document.createElement('div');
-            heart.style.cssText = `
-                position: fixed;
-                color: rgba(255,51,102,${Math.random()*0.5});
-                font-size: ${Math.random()*20 + 10}px;
-                left: ${Math.random()*100}%;
-                top: ${Math.random()*100}%;
-                pointer-events: none;
-                animation: float ${Math.random()*10 + 10}s infinite linear;
-            `;
-            heart.innerHTML = '❤️';
-            document.body.appendChild(heart);
-        }
-
-        // Add keyframe animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                from { transform: translateY(-100vh) rotate(0deg) scale(0.5); }
-                to { transform: translateY(100vh) rotate(360deg) scale(1.1); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html> -->
 
 ```html
 <!DOCTYPE html>
@@ -327,10 +80,11 @@
   align-items: center;
   margin: 10px 0 18px;
   pointer-events: none;
+  width: 100%;
 }
 
 .stickerImg{
-  width: clamp(90px, 26vw, 160px);
+  width: 500px;
   height: auto;
   opacity: .95;
   transform: rotate(var(--rot, 0deg));
@@ -695,7 +449,7 @@
 
 
     .stickerGrid{
-        width: min(520px, 92vw);
+        width: 100%;
         margin: 18px auto 26px;
         display: flex;
         flex-wrap: wrap;
@@ -705,7 +459,7 @@
     }
 
     .stickerGrid img{
-    width: clamp(64px, 18vw, 300px);
+    width: 25%;
     height: auto;
     opacity: 0;
     transform: scale(.6) rotate(var(--rot, 0deg));
@@ -1002,20 +756,7 @@ I choose you. Today. Tomorrow. Always.
 
   for (const item of timelineData) {
 
-        // ✅ Sticker-only block (between cards)
-            if (item.img && !item.date && !item.title && !item.desc) {
-            const wrap = document.createElement("div");
-            wrap.className = "stickerBetween";
-
-            const img = document.createElement("img");
-            img.className = "stickerImg";
-            img.src = item.img;
-            img.alt = item.imgAlt || "Sticker";
-
-            wrap.appendChild(img);
-            container.appendChild(wrap);
-            continue;
-            }
+       
 
             // ✅ Normal timeline card
             const card = document.createElement("article");
@@ -1356,7 +1097,6 @@ I choose you. Today. Tomorrow. Always.
             "image (3).png",
             "image (4).png",
             "image (5).png",
-            
             "image (8).png",
         ];
 
