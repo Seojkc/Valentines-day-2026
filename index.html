@@ -1,0 +1,1410 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Timeline ❤️</title>
+    <style>
+        :root {
+            --primary: #ff3366;
+            --secondary: #ff758c;
+            --bg: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .heading{
+            color: white;
+            text-align: center;
+            padding: 20px;
+            z-index: 100;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.534);;
+
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
+        }
+
+        .card {
+            position: relative;
+            width: 45%;
+            padding: 25px;
+            margin: 50px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:nth-child(even) {
+            margin-left: 55%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .card:nth-child(odd)::before {
+            right: -65px;
+        }
+
+        .card:nth-child(even)::before {
+            left: -65px;
+        }
+
+        .date {
+            color: var(--primary);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 15px 0;
+            filter: drop-shadow(0 0 5px rgba(255, 51, 102, 0.5));
+        }
+
+        .description {
+            color: white;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .card.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                margin-left: 10% !important;
+            }
+
+            .card::before {
+                left: -45px !important;
+                right: auto !important;
+            }
+
+            .timeline-line {
+                left: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">
+        Happy Valentine's Day Amaldakutti  </h1>
+    <div class="timeline">
+        <div class="timeline-line"></div>
+        <div id="cards-container"></div>
+    </div>
+
+    <script>
+        const timelineData = [
+
+            {
+                date: "Day One",
+                emoji: "💬",
+                desc: "I don’t know who started our first conversation 🤔💬—we’re still debating that 😆—but after those casual chats, I found myself falling in love with every word you said 💕. The thought of having you by my side forever, listening to my stories 📖💑, felt so right, and when I finally confessed my feelings 💖, it wasn’t childish or accidental—it was the most mature and heartfelt decision of my life ❤️✨."
+            },
+            {
+                date: "Nov 23, 2023 ❤️",
+                emoji: "🌹",
+                desc: "The day I proposed to you, my hands trembled 😰, my heart raced 💓, and I was completely panicked 😖—but it was worth every second 💍✨. You didn’t say yes 😅, but you didn’t say no either 😉—instead, you smiled 😊, held my hand 🤝, and whispered, “Let’s try this” 💕… and in that moment, my world felt perfect 🥰❤️."
+            },
+            {
+                date: "Dec 13, 2023 ❤️",
+                emoji: "💑",
+                desc: "After almost a month of heartfelt talks 🗣️💞, convincing each other that we could make it work despite the distance 🌍💑, you were still so worried—about your parents, our future, and whether love could truly bridge the miles 😔💭. But when you finally said yes 💍😭, my heart soared to a level of happiness I never knew existed, knowing that no matter what, we were in this together forever ❤️✨."
+            },
+            {
+                date: "Jan 15, 2024 ❤️",
+                emoji: "🔐",
+                desc: "The day you said you would keep all the chambers of your heart just for me 💖🔐, I felt like the luckiest soul in the universe ✨. In that moment, every fear faded, every doubt vanished, and I knew—my heart had finally found its forever home in you ❤️🏡."
+            },
+            {
+                date: "Jan 28, 2024 ❤️",
+                emoji: "✈️",
+                desc: "After the long wait, I finally traveled across the world ✈️❤️—all the way from Canada to Bangalore—just to see you. Sitting on a bench in your college, my heart pounded 💓, rehearsing a thousand ways to say my first words, but the moment you walked in, time itself seemed to stop ⏳✨—I had seen you countless times before, yet never this breathtakingly beautiful 😍.<br><br>You came closer and sat next to me 💕, and though neither of us remembers who spoke first or what was said, our conversation soon flowed naturally, as if our hearts had been waiting for this moment forever 💖. And in that magical first date, we both knew—we had done something truly right 🥰✨."
+            },
+            {
+                date: "Feb 11, 2024 ❤️",
+                emoji: "😘",
+                desc: " Our second date was calmer, yet one of the most unforgettable days of my life ❤️. Sitting beside you in the theater, watching <i>Premalu</i> 🎬, I found myself more captivated by you than the movie—your every smile 😊, the way you sat, the way you crossed your hands and gently leaned into me 💕.<br><br>And then, our first kiss happened—soft, magical, and filled with a feeling I had never known before 😘✨. I had asked for it, and though you didn’t say much, you didn’t refuse either… in that moment, I felt a love deeper than words could ever express ❤️🔥.  "
+            },
+            {
+                date: "Feb 11, 2024 ❤️",
+                emoji: "😘",
+                desc: " Our third date was the most special among the three, the one I cherished the most ❤️. This time, there was no stress, no nervousness—just us, talking freely, laughing effortlessly, and enjoying each other’s company like we’d been doing this forever 😊💬.<br><br>For the first time, you asked me to visit again 🥹, a simple request that meant everything to me. We talked for hours, kissed, hugged—things that usually happen in a different order, but we’ve never followed the usual path anyway 💕.<br><br>As my vacation ended, the goodbye was heavy 😔, but even through the sadness, we held onto our promises, knowing this was just the beginning of something forever ❤️✨. And though it's been a long time since these moments happened, I believe it’s always beautiful to look back and relive the days that made us who we are today 🥰💖. "
+            },
+            {
+                date: "Feb 14, 2025 💖",
+                emoji: "🕯️",
+                desc: "It’s been almost a year since we’ve seen each other, and it's not because I don’t want to, but because there are important things I need to do here that I can’t leave behind, and I know you understand that so well 💖. The understanding and care you’ve shown me is the most precious gift I could ever ask for, and no matter what I give, it will never compare to it 🌟.<br><br>During the struggles I’ve faced here, your calls and your presence have been the greatest comfort, bringing peace like nothing else 🕊️. I’ve never met a girl with such maturity, understanding, and care for me,like my  mother ❤️.<br><br>Your daily calls, even amidst your busy schedule, are the highlight of my day—sometimes I wait for those 10 minutes with so much eagerness, but every second of it is worth more than words can express ⏳💬. Every time you send me photos of you, it makes me so happy, and I feel like treasuring them forever, keeping them close to my heart 🖼️💘.<br><br>I don’t know how to thank you enough, but I promise you this: I will treat you like my little princess for a lifetime 👑💫. I really want to make today as romantic as possible for you, but due to the situation, I can’t—still, I’ll try my best to make it even more special next time, and always give you my best for a lifetime of love 💕✨."
+            },
+            {
+                date: "♾️💖",
+                emoji: "💫",
+                desc: "During this time, we’ve truly understood each other on a deeper level, celebrated festivals together 🎉, and done all the little cringe things that only we could enjoy 😆💖—every moment has been so beautiful, fun, and full of love. I hope this bond we share lasts forever, just as it always has, growing stronger with each passing day 🌱💞.<br><br>I look forward to all the new adventures life will bring us, and I can’t wait to share every moment, every joy, and all the fun together as we continue to build our future 💫❤️.<br><br>To infinity and beyond, my love 💫❤️—our journey together has no end, only endless moments of happiness, laughter, and memories that will last forever. You and I, bound by love, will keep growing stronger and more beautiful with each passing day, through all that life has to offer 💖🚀."
+            }
+        ];
+
+        function createCards() {
+            const container = document.getElementById('cards-container');
+            
+            timelineData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = `card ${index % 2 === 0 ? '' : 'even'}`;
+                card.innerHTML = `
+                    <div class="date">${item.date}</div>
+                    <div class="emoji">${item.emoji}</div>
+                    <div class="description">${item.desc}</div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        function checkScroll() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if(cardTop < window.innerHeight * 0.8) {
+                    card.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        createCards();
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Add floating hearts background
+        for(let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.style.cssText = `
+                position: fixed;
+                color: rgba(255,51,102,${Math.random()*0.5});
+                font-size: ${Math.random()*20 + 10}px;
+                left: ${Math.random()*100}%;
+                top: ${Math.random()*100}%;
+                pointer-events: none;
+                animation: float ${Math.random()*10 + 10}s infinite linear;
+            `;
+            heart.innerHTML = '❤️';
+            document.body.appendChild(heart);
+        }
+
+        // Add keyframe animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                from { transform: translateY(-100vh) rotate(0deg) scale(0.5); }
+                to { transform: translateY(100vh) rotate(360deg) scale(1.1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> -->
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Valentine's Timeline ❤️</title>
+
+  <style>
+    :root{
+      --safePad: 16px;
+      --primary:#ff3366;
+      --secondary:#ff758c;
+      --bg:#0f1016;
+      --text:rgba(255,255,255,.93);
+      --muted:rgba(255,255,255,.72);
+      --card:rgba(255,255,255,.10);
+      --cardBorder:rgba(255,255,255,.14);
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --glow:0 0 26px rgba(255,51,102,.22);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    html{ background: var(--bg); }
+
+    /* ===== Continuous background fix (no “block seams”) ===== */
+    body{
+      background: none;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      overflow-x:hidden;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
+      position: relative;
+    }
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1200px 600px at 18% 10%, rgba(255,51,102,.16), transparent 62%),
+        radial-gradient(900px 500px at 82% 18%, rgba(255,117,140,.14), transparent 58%),
+        radial-gradient(900px 700px at 50% 90%, rgba(255,51,102,.10), transparent 60%),
+        var(--bg);
+      transform: translateZ(0);
+    }
+    body::after{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .045;
+      background-image:
+        repeating-linear-gradient(0deg,
+          rgba(255,255,255,.035) 0px,
+          rgba(255,255,255,0) 2px,
+          rgba(0,0,0,.03) 4px);
+      mix-blend-mode: overlay;
+    }
+
+    /* Canvas background */
+    #bg{
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    .stickerBetween{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 18px;
+  pointer-events: none;
+}
+
+.stickerImg{
+  width: clamp(90px, 26vw, 160px);
+  height: auto;
+  opacity: .95;
+  transform: rotate(var(--rot, 0deg));
+  filter: drop-shadow(0 16px 26px rgba(0,0,0,.35));
+}
+
+
+
+    /* Soft glow following cursor */
+    .cursorGlow{
+      position:fixed; inset:auto;
+      width:280px; height:280px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(255,51,102,.18), transparent 60%);
+      filter: blur(10px);
+      transform: translate(-50%,-50%);
+      pointer-events:none;
+      z-index:3;
+      opacity:.55;
+    }
+
+    /* Foreground content wrapper */
+    .wrap{position:relative; z-index:4}
+    .container{max-width:980px; margin:0 auto; padding:0 18px}
+
+    /* Hero */
+    .hero{
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 28px 0 12px;
+    }
+    .heroCard{
+      width:min(980px, 96vw);
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow:hidden;
+      position:relative;
+    }
+    .heroInner{ padding: 18px 14px 16px; }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--glow);
+      margin-bottom:16px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .title{
+      font-size: clamp(2.0rem, 4vw, 3.1rem);
+      line-height:1.08;
+      letter-spacing:0.2px;
+      text-shadow:0 0 18px rgba(255,255,255,.18);
+      margin-bottom:8px;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size: 1rem;
+      line-height:1.6;
+      max-width: 70ch;
+      margin-bottom:18px;
+    }
+    .typeLine{
+      font-size:1.05rem;
+      line-height:1.6;
+      color:rgba(255,255,255,.86);
+      border-left: 3px solid rgba(255,51,102,.7);
+      padding-left:12px;
+      margin:14px 0 18px;
+      min-height: 3.2em;
+      white-space: pre-wrap;
+    }
+
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      width: 100%;
+      min-height: 48px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      padding:12px 14px;
+      border-radius:12px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.92);
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.20); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,51,102,.95), rgba(255,117,140,.92));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover{ filter: brightness(1.03); }
+    .btn:active{ transform: translateY(0px) scale(.98); }
+
+    .statsRow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .statCard{
+      padding: 14px;
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .statLabel{ color:var(--muted); font-size:.95rem; margin-bottom:6px; }
+    .statValue{
+      font-size: 1.15rem;
+      line-height:1.5;
+      text-shadow: 0 0 14px rgba(255,51,102,.20);
+    }
+    .mini{ color:var(--muted); font-size:.92rem; margin-top:6px; }
+
+    /* Timeline */
+    .heading{
+      text-align:center;
+      padding: 14px 0 6px;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 0 18px rgba(255,255,255,.22);
+      margin-bottom: 18px;
+    }
+    .timeline{
+      position:relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 44px 18px 70px;
+    }
+    .timeline-line{
+      position:absolute;
+      left:50%;
+      top: 0;
+      width:4px;
+      height:100%;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      transform: translateX(-50%);
+      box-shadow: 0 0 28px rgba(255,51,102,.25);
+      opacity: .9;
+    }
+
+    .card{
+      position:relative;
+      width: 45%;
+      padding: 20px 18px;
+      margin: 46px 0;
+      background: var(--card);
+      border: 1px solid var(--cardBorder);
+      border-radius: 16px;
+      box-shadow: 0 16px 44px rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transform: translateY(34px);
+      opacity: 0;
+      transition: transform .8s ease, opacity .8s ease;
+    }
+    .card:nth-child(even){ margin-left: 55%; }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius:50%;
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary);
+      opacity:.95;
+    }
+    .card:nth-child(odd)::before{ right: -60px; }
+    .card:nth-child(even)::before{ left: -60px; }
+
+    .date{
+      color: rgba(255,117,140,.95);
+      font-size:1.05rem;
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(255,51,102,.28);
+    }
+    .cardTitle{
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      letter-spacing:.2px;
+    }
+    .row{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .emoji{
+      font-size: 2.4rem;
+      line-height:1;
+      filter: drop-shadow(0 0 6px rgba(255,51,102,.35));
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    .description{
+      color: rgba(255,255,255,.90);
+      line-height: 1.65;
+      opacity: .96;
+      white-space: pre-wrap;
+    }
+    .quote{
+      margin-top: 12px;
+      color: rgba(255,255,255,.82);
+      font-style: italic;
+      border-left: 3px solid rgba(255,51,102,.65);
+      padding-left: 10px;
+    }
+    .photo{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      margin-top: 12px;
+      display:block;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    .card.active{ transform: translateY(0); opacity: 1; }
+
+    /* Footer / Ending */
+    .ending{
+      max-width: 900px;
+      margin: 10px auto 60px;
+      padding: 0 18px;
+      text-align:center;
+      color: rgba(255,255,255,.90);
+    }
+    .endingBox{
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      padding: 18px 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .endingBox h2{
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+    .endingBox p{
+      color: rgba(255,255,255,.84);
+      line-height:1.7;
+      margin-top: 8px;
+    }
+
+    /* Love note modal */
+    .modalOverlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 999;
+      padding: 18px;
+    }
+    .modal{
+      width: min(720px, 96vw);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 18px 16px;
+      position:relative;
+    }
+    .modal h3{ margin-bottom: 10px; }
+    .modal p{ color: rgba(255,255,255,.86); line-height:1.75; white-space: pre-wrap; }
+    .modalClose{
+      position:absolute; top:10px; right:10px;
+      border:none; cursor:pointer;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+    }
+
+    .beautifulquote{
+      font-family: "Playfair Display", "Georgia", serif;
+      line-height: 1.4;
+      font-size: 18px;
+    }
+
+    /* Kisses */
+    #kissContainer{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .kissPop{
+      width: clamp(34px, 9vw, 56px);
+      height: auto;
+      position: absolute;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      animation: kissPop 1.3s ease-out forwards;
+      will-change: transform, opacity, filter;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+    }
+    @keyframes kissPop{
+      0%{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(var(--rot));
+      }
+      15%{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(var(--scale)) rotate(var(--rot));
+      }
+      100%{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(calc(var(--scale) + 0.35)) rotate(calc(var(--rot) + 10deg));
+      }
+    }
+
+    /* Text images (optional, fixed from your old CSS) */
+    .textImageWrap{
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 18px 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .textIMage{
+      display: block;
+      width: clamp(260px, 78vw, 720px);
+      height: auto;
+      opacity: 0.92;
+      margin: 500px auto;
+      filter: drop-shadow(0 14px 30px rgba(0,0,0,.35));
+    }
+    .namecard{
+        width: clamp(260px, 78vw, 600px);
+
+    }
+
+
+    .stickerGrid{
+        width: min(520px, 92vw);
+        margin: 18px auto 26px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        pointer-events: none;
+    }
+
+    .stickerGrid img{
+    width: clamp(64px, 18vw, 300px);
+    height: auto;
+    opacity: 0;
+    transform: scale(.6) rotate(var(--rot, 0deg));
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,.28));
+    animation: stickerIn .55s ease-out forwards;
+    }
+
+    @keyframes stickerIn{
+    0%   { opacity: 0; transform: scale(.55) rotate(var(--rot,0deg)); }
+    70%  { opacity: 1; transform: scale(1.06) rotate(var(--rot,0deg)); }
+    100% { opacity: .98; transform: scale(1) rotate(var(--rot,0deg)); }
+    }
+
+
+
+
+    /* Mobile layout */
+    @media (max-width: 840px){
+      .statsRow{ grid-template-columns: 1fr; }
+      .card{ width: 92%; margin-left: 8% !important; }
+      .card::before{ left:-44px !important; right:auto !important; }
+      .timeline-line{ left: 34px; }
+    }
+
+    @media (max-width: 480px){
+      .container{ padding: 0 var(--safePad); }
+      .timeline{ padding: 30px var(--safePad) 60px; }
+      .timeline-line{ left: 22px; width: 3px; }
+
+      .card{
+        width: 100%;
+        margin: 22px 0;
+        margin-left: 0 !important;
+        padding: 16px 14px;
+      }
+      .card::before{
+        left: -36px !important;
+        width: 28px;
+        height: 28px;
+      }
+      .emoji{ font-size: 2.1rem; }
+      .description{ font-size: 0.98rem; }
+      .heading{ margin-bottom: 10px; padding: 10px var(--safePad) 0; }
+      .beautifulquote{ font-size: 1rem; line-height: 1.5; }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto !important; }
+      .card{ transition: none; transform:none; opacity:1; }
+      .cursorGlow{ display:none; }
+      body::after{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bg"></canvas>
+  <div id="kissContainer"></div>
+  <div class="cursorGlow" id="cursorGlow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <!-- Optional text images -->
+    <div class="textImageWrap">
+      <img src="text1.png" alt="" class="textIMage" />
+    </div>
+    <div class="textImageWrap">
+      <img src="text2.png" alt="" class="textIMage" />
+    </div>
+    <div class="textImageWrap">
+      <img src="text3.png" alt="" class="textIMage namecard" />
+    </div>
+
+    <div class="stickerGrid" id="stickerGrid" aria-hidden="true"></div>
+
+    <section class="hero">
+      <div class="container">
+        <div class="heroCard">
+          <div class="heroInner">
+            <div class="badge">❤️ Valentine’s Timeline • Made with love</div>
+            <h1 class="title" id="heroTitle">Happy Valentine’s Day</h1>
+            <p class="subtitle" id="heroSubtitle">
+              This is our story — not perfect, not always easy, but deeply real.
+              And somehow… every day, I fall again.
+            </p>
+
+            <div class="typeLine" id="typeLine" aria-live="polite"></div>
+
+            <div class="controls">
+              <button class="btn primary" id="startBtn">Start our timeline ✨</button>
+              <button class="btn" id="kissBtn">Send a kiss 😘</button>
+              <button class="btn" id="noteBtn">Open my love note 💌</button>
+            </div>
+
+            <div class="statsRow" aria-label="Relationship stats">
+              <div class="statCard">
+                <div class="statLabel">Time with you (and counting)</div>
+                <div class="statValue" id="togetherCounter">—</div>
+                <div class="mini" id="togetherMini">Every second, my heart chooses you.</div>
+              </div>
+              <div class="statCard">
+                <div class="statLabel beautifulquote">
+                  Only 6 days together in 813 — yet love never felt distant. Proof that when two hearts truly choose each other, distance means nothing.
+                </div>
+              </div>
+            </div>
+
+            <audio id="bgMusic" loop></audio>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="heading container" id="timelineHeading">Our Timeline ❤️</h2>
+
+    <main class="timeline" id="timeline">
+      <div class="timeline-line" aria-hidden="true"></div>
+      <div id="cards-container"></div>
+    </main>
+
+    <section class="ending">
+      <div class="endingBox">
+        <h2>♾️ My forever is you</h2>
+        <p>
+          If distance is the test, then love is the answer.
+          I’m proud of us — for staying, for choosing, for trying.
+        </p>
+        <p id="endingPersonalLine">
+          And when I finally hold you again… I won’t let go so easily.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Love note modal -->
+  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Love note">
+    <div class="modal">
+      <button class="modalClose" id="modalClose">Close ✖</button>
+      <h3 id="modalTitle">My love note</h3>
+      <p id="modalBody"></p>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const CONFIG = {
+        girlfriendName: "Amaldakutti",
+        relationshipStartISO: "2023-11-23T00:00:00",
+        nextMeetISO: null,
+        typingLine:
+          "Even across miles, my heart finds you… every time. 🫶\nYou are my favorite notification. ❤️",
+        loveNoteTitle: "To my favorite person ❤️",
+        loveNoteBody:
+`Hey love,
+
+If you’re reading this, I want you to know something simple and true:
+I’m grateful for you.
+
+For your patience.
+For your softness.
+For the way you stay — even when it’s hard.
+
+I may not be beside you right now…
+but I’m with you in every little way:
+in my thoughts, in my prayers, in my everyday choices.
+
+Happy Valentine’s Day, my love.
+This isn’t just a date — it’s a reminder:
+I choose you. Today. Tomorrow. Always.
+
+— Yours.`
+      };
+
+      const timelineData = [
+        {
+            date: "Day One",
+            emoji: "💬",
+            desc: "I don’t know who started our first conversation 🤔💬—we’re still debating that 😆—but after those casual chats, I found myself falling in love with every word you said 💕. The thought of having you by my side forever, listening to my stories 📖💑, felt so right, and when I finally confessed my feelings 💖, it wasn’t childish or accidental—it was the most mature and heartfelt decision of my life ❤️✨."
+            ,quote:"Some conversations begin as simple words, but somehow they become the start of forever. Falling for you felt natural, like my heart already knew you."
+        },
+        {
+            date: "Nov 23, 2023 ❤️",
+            emoji: "🌹",
+            desc: "The day I proposed to you, my hands trembled 😰, my heart raced 💓, and I was completely panicked 😖—but it was worth every second 💍✨. You didn’t say yes 😅, but you didn’t say no either 😉—instead, you smiled 😊, held my hand 🤝, and whispered, “Let’s try this” 💕… and in that moment, my world felt perfect 🥰❤️."
+            ,quote:"It wasn’t a perfect moment — it was a real one. And when you said ‘let’s try,’ my heart finally felt at home."
+        },
+        {
+            date: "Dec 13, 2023 ❤️",
+            emoji: "💑",
+            desc: "After almost a month of heartfelt talks 🗣️💞, convincing each other that we could make it work despite the distance 🌍💑, you were still so worried—about your parents, our future, and whether love could truly bridge the miles 😔💭. But when you finally said yes 💍😭, my heart soared to a level of happiness I never knew existed, knowing that no matter what, we were in this together forever ❤️✨."
+             ,quote:"Love didn’t erase the distance or the fears — it simply gave us the courage to choose each other anyway. That yes changed everything for me"
+       },
+        {
+            date: "Jan 15, 2024 ❤️",
+            emoji: "🔐",
+            desc: "The day you said you would keep all the chambers of your heart just for me 💖🔐, I felt like the luckiest soul in the universe ✨. In that moment, every fear faded, every doubt vanished, and I knew—my heart had finally found its forever home in you ❤️🏡."
+             ,quote:"When you gave me a place in your heart, mine finally felt at peace. In that moment, I knew I had found my forever home."
+       },
+        {
+            date: "Jan 28, 2024 ❤️",
+            emoji: "✈️",
+            desc: "After the long wait, I finally traveled across the world ✈️❤️—all the way from Canada to Bangalore—just to see you. Sitting on a bench in your college, my heart pounded 💓, rehearsing a thousand ways to say my first words, but the moment you walked in, time itself seemed to stop ⏳✨—I had seen you countless times before, yet never this breathtakingly beautiful 😍.<br><br>You came closer and sat next to me 💕, and though neither of us remembers who spoke first or what was said, our conversation soon flowed naturally, as if our hearts had been waiting for this moment forever 💖. And in that magical first date, we both knew—we had done something truly right 🥰✨."
+             ,quote:"Across miles and time zones, my heart found its way to you. The moment I saw you, I knew the wait was worth every second."
+       },
+        {
+            date: "Feb 11, 2024 ❤️",
+            emoji: "😘",
+            desc: " Our second date was calmer, yet one of the most unforgettable days of my life ❤️. Sitting beside you in the theater, watching <i>Premalu</i> 🎬, I found myself more captivated by you than the movie—your every smile 😊, the way you sat, the way you crossed your hands and gently leaned into me 💕.<br><br>And then, our first kiss happened—soft, magical, and filled with a feeling I had never known before 😘✨. I had asked for it, and though you didn’t say much, you didn’t refuse either… in that moment, I felt a love deeper than words could ever express ❤️🔥.  "
+                  ,quote:"The movie faded, the world grew quiet, and all I could feel was you beside me. That first kiss wasn’t just a moment — it was the beginning of something unforgettable."
+  },
+        {
+            date: "Feb 11, 2024 ❤️",
+            emoji: "😘",
+            desc: " Our third date was the most special among the three, the one I cherished the most ❤️. This time, there was no stress, no nervousness—just us, talking freely, laughing effortlessly, and enjoying each other’s company like we’d been doing this forever 😊💬.<br><br>For the first time, you asked me to visit again 🥹, a simple request that meant everything to me. We talked for hours, kissed, hugged—things that usually happen in a different order, but we’ve never followed the usual path anyway 💕.<br><br>As my vacation ended, the goodbye was heavy 😔, but even through the sadness, we held onto our promises, knowing this was just the beginning of something forever ❤️✨. And though it's been a long time since these moments happened, I believe it’s always beautiful to look back and relive the days that made us who we are today 🥰💖. "
+                  ,quote:"That day felt effortless, like we had always belonged in each other’s world. Even in goodbye, I knew our story was only beginning."
+  },
+        {
+            date: "Feb 14, 2025 💖",
+            emoji: "🕯️",
+            desc: "It’s been almost a year since we’ve seen each other, and it's not because I don’t want to, but because there are important things I need to do here that I can’t leave behind, and I know you understand that so well 💖. The understanding and care you’ve shown me is the most precious gift I could ever ask for, and no matter what I give, it will never compare to it 🌟.<br><br>During the struggles I’ve faced here, your calls and your presence have been the greatest comfort, bringing peace like nothing else 🕊️. I’ve never met a girl with such maturity, understanding, and care for me,like my  mother ❤️.<br><br>Your daily calls, even amidst your busy schedule, are the highlight of my day—sometimes I wait for those 10 minutes with so much eagerness, but every second of it is worth more than words can express ⏳💬. Every time you send me photos of you, it makes me so happy, and I feel like treasuring them forever, keeping them close to my heart 🖼️💘.<br><br>I don’t know how to thank you enough, but I promise you this: I will treat you like my little princess for a lifetime 👑💫. I really want to make today as romantic as possible for you, but due to the situation, I can’t—still, I’ll try my best to make it even more special next time, and always give you my best for a lifetime of love 💕✨."
+                   ,quote:"Distance may keep us apart, but your love is the peace I carry every day. Even in the hardest moments, you make everything feel worth it."
+ },
+        {
+            date: "Sept 7, 2025 💖",
+            emoji: "🌸",
+            desc: "After such a long wait, I finally got to see you again after a year and a half ✈️❤️. I had imagined that moment so many times, counting the days and dreaming of everything we said we would do once we met again 💫. When I saw you, my heart felt full in a way words can’t explain — how could I stay calm when I had waited so long for that moment? 🥹💕 <br><br>I wished we could find a quiet little corner of the world 🌍🤍, just you and me, away from everything else, so we could simply enjoy each other the way we truly wanted. I still remember those moments — your closeness, your care, the love you gave me so softly and sincerely 🫶✨. In those moments, it felt like my whole world was right there beside me, and nothing else mattered 🌙❤️."                  
+            ,quote:"After all the waiting, being close to you felt like finding my whole world in one moment."
+  },   
+  {
+            date: "Sept 14, 2025 💖",
+            emoji: "🌼",
+            desc: "You once asked me how I could be so confident that day… honestly, I don’t even know 🥹❤️. How could I think about anything else when my whole world was sitting right there in my arms? 🤍✨ In that moment, there was no fear, no overthinking — just you, just us, and the time we were sharing 💕🌙.<br><br>All I wanted was to freeze every second, to fill my gallery with endless photos of us 📸💫 — not just pictures, but memories that hold so much meaning. I want to capture every smile, every laugh, every little moment, because each one feels priceless 💖. Those Instax films especially… whenever I look at them, I can relive the entire day — just you and me, nothing else 🌸🤍. Sometimes I feel like taking unlimited photos, keeping them close, and looking at them again and again, just to feel that happiness all over 💞✨."                  
+            ,quote:"When my whole world is in my arms, nothing else exists — only memories I want to keep forever."
+  },
+
+
+    {
+            date: "Sept 28, 2025 💖",
+            emoji: "🌻",
+            desc: "On my last day with you that year, my heart felt heavy yet full at the same time 🥺❤️. I just wanted to give you all my love — to leave nothing unsaid, nothing undone — so I would never regret holding back 💞✨. I even chose to spend that day with you instead of my family, and in that choice, I truly realized your place in my heart 🌍🤍.<br><br>Our first time shopping together felt so special 🛍️💕. The memory book, the sketch pens — simple things, yet they meant so much because we chose them together. I loved watching you carefully check the price tags and think before buying 🥹 — just like me. But honestly, you are one of the few people in my life for whom I would buy anything without even looking at the price, because nothing can compare to the love, care, and support you give me ❤️✨.<br><br>Writing our memories in that book felt magical 📖💘 — something we had never done before. In that moment, I realized I don’t just want big memories with you… I want to do every little thing in life with you 🤍🌸"           
+            ,quote:"The simplest moments with you feel priceless, because love like yours is beyond any price."
+  },
+  {
+            date: "Feb 14, 2026 💖",
+            emoji: "🌹",
+            desc: "I never felt the urge to visit home until I met you ✈️❤️. I used to think the trip was expensive, but after meeting you, I realized nothing compares to the memories you gave me 💕✨. Every dollar felt like the most beautiful investment, because it brought me closer to you 🫶💫. <br><br>And somewhere in all of this, I found myself dreaming of a lifetime with you 🏡💖 — waking up every morning beside you ☀️, cooking together in the kitchen 🍳💕, sharing ordinary days that feel extraordinary just because we’re together. Maybe these are impulsive thoughts, maybe it’s just love overflowing 🤍✨… but I truly want to keep this excitement alive every single day and live in this beautiful dream with you 🌙♾️."
+                  ,quote:"The journey was worth every mile — because in the end, all I ever wanted was a lifetime beside you."
+  }, 
+
+    {
+            date: "until now💖",
+            emoji: "🌼",
+            desc: "Since our last visit, all I keep thinking about is coming back to you — to laugh again, to be silly together, and to relive all those beautiful crazy moments we shared ❤️✨. Your gift and the love letter you gave me before we left mean more than words can explain 💌🌸. The scent you put on that book still lingers, and every time I read it, it feels like you’re right beside me again 🤍🥹.<br><br>Every word you wrote carries your love, your care, and your heart, and I can truly feel it every time I open those pages 📖💫. It has become one of the most precious things I own — something I want to keep forever, together with all the memories we made 🫶💕.<br><br>Thank you for loving me so deeply, for supporting me, and for giving me hope during the moments when I felt lost 🌙❤️. Your love gives meaning to my days, and makes me want to live every second of my life with you ♾️💞."                  
+            ,quote:"Even when miles separate us, your love stays close — like a piece of home I carry with me everywhere."
+  }, 
+
+
+        { 
+            date: "♾️💖", title: "The future", emoji: "💫",
+            desc: "One day the distance will be a story we tell.\nAnd we’ll smile… because we made it.",
+            quote: "Endlessly yours." 
+        },
+      ];
+
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => document.querySelectorAll(sel);
+
+      function safeDate(iso) {
+        const t = Date.parse(iso);
+        return Number.isFinite(t) ? new Date(t) : null;
+      }
+
+      function formatDuration(ms) {
+        const s = Math.max(0, Math.floor(ms / 1000));
+        const days = Math.floor(s / 86400);
+        const hrs = Math.floor((s % 86400) / 3600);
+        const mins = Math.floor((s % 3600) / 60);
+        const secs = s % 60;
+        return { days, hrs, mins, secs };
+      }
+
+      function setHero() {
+        const heroTitle = $("#heroTitle");
+        if (heroTitle) heroTitle.textContent = `Happy Valentine’s Day ${CONFIG.girlfriendName} ❤️`;
+      }
+
+      function buildCards() {
+  const container = $("#cards-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  for (const item of timelineData) {
+
+        // ✅ Sticker-only block (between cards)
+            if (item.img && !item.date && !item.title && !item.desc) {
+            const wrap = document.createElement("div");
+            wrap.className = "stickerBetween";
+
+            const img = document.createElement("img");
+            img.className = "stickerImg";
+            img.src = item.img;
+            img.alt = item.imgAlt || "Sticker";
+
+            wrap.appendChild(img);
+            container.appendChild(wrap);
+            continue;
+            }
+
+            // ✅ Normal timeline card
+            const card = document.createElement("article");
+            card.className = "card";
+
+            const date = document.createElement("div");
+            date.className = "date";
+            date.textContent = item.date || "";
+
+            const title = document.createElement("div");
+            title.className = "cardTitle";
+            title.textContent = item.title || "";
+
+            const row = document.createElement("div");
+            row.className = "row";
+
+            const emoji = document.createElement("div");
+            emoji.className = "emoji";
+            emoji.textContent = item.emoji || "❤️";
+
+            const content = document.createElement("div");
+
+            const desc = document.createElement("div");
+            desc.className = "description";
+            desc.innerHTML = item.desc || "";
+            content.appendChild(desc);
+
+            if (item.quote) {
+            const q = document.createElement("div");
+            q.className = "quote";
+            q.textContent = item.quote;
+            content.appendChild(q);
+            }
+
+            row.appendChild(emoji);
+            row.appendChild(content);
+
+            card.appendChild(date);
+            card.appendChild(title);
+            card.appendChild(row);
+
+            container.appendChild(card);
+        }
+    }
+
+      function revealOnView() {
+        const cards = Array.from($$(".card"));
+        if (!cards.length) return;
+
+        if (!("IntersectionObserver" in window)) {
+          for (const c of cards) c.classList.add("active");
+          return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("active");
+              io.unobserve(e.target);
+            }
+          }
+        }, { threshold: 0.18 });
+
+        for (const c of cards) io.observe(c);
+      }
+
+      async function typeLine(el, text, speedMs = 22) {
+        if (!el) return;
+        el.textContent = "";
+        const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) { el.textContent = text; return; }
+        for (let i = 0; i < text.length; i++) {
+          el.textContent += text[i];
+          await new Promise((r) => setTimeout(r, speedMs));
+        }
+      }
+
+      function startCounters() {
+        const start = safeDate(CONFIG.relationshipStartISO);
+        const togetherEl = $("#togetherCounter");
+
+        function tick() {
+          if (togetherEl && start) {
+            const d = formatDuration(Date.now() - start.getTime());
+            togetherEl.textContent =
+              `${d.days} days • ${d.hrs} hours • ${d.mins} minutes • ${d.secs} seconds`;
+          }
+        }
+        tick();
+        window.setInterval(tick, 1000);
+      }
+
+      function setupModal() {
+        const overlay = $("#modalOverlay");
+        const closeBtn = $("#modalClose");
+        const noteBtn = $("#noteBtn");
+        const title = $("#modalTitle");
+        const body = $("#modalBody");
+
+        if (title) title.textContent = CONFIG.loveNoteTitle;
+        if (body) body.textContent = CONFIG.loveNoteBody;
+
+        function open() { if (overlay) overlay.style.display = "flex"; }
+        function close() { if (overlay) overlay.style.display = "none"; }
+
+        noteBtn && noteBtn.addEventListener("click", open);
+        closeBtn && closeBtn.addEventListener("click", close);
+        overlay && overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+      }
+
+      /* Canvas background: hearts + twinkles */
+      function startCanvasBackground() {
+        const canvas = $("#bg");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        let w = 0, h = 0, rafId = 0;
+        let running = true;
+
+        const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
+        function resize() {
+          w = Math.floor(window.innerWidth);
+          h = Math.floor(window.innerHeight);
+          canvas.width = Math.floor(w * DPR);
+          canvas.height = Math.floor(h * DPR);
+          canvas.style.width = w + "px";
+          canvas.style.height = h + "px";
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+        resize();
+        window.addEventListener("resize", resize, { passive: true });
+
+        const hearts = [];
+        const sparkles = [];
+
+        const heartCount = reduce ? 18 : 46;
+        const sparkleCount = reduce ? 20 : 60;
+
+        function rand(min, max){ return Math.random() * (max - min) + min; }
+
+        function makeHeart() {
+          return { x: rand(0, w), y: rand(-h, h), s: rand(12, 24),
+            vy: rand(0.25, 0.9), vx: rand(-0.15, 0.15), r: rand(-0.02, 0.02), a: rand(0.18, 0.55) };
+        }
+
+        function makeSparkle() {
+          return { x: rand(0, w), y: rand(0, h), s: rand(1, 2.4), a: rand(0.08, 0.35), tw: rand(0.005, 0.02) };
+        }
+
+        for (let i=0;i<heartCount;i++) hearts.push(makeHeart());
+        for (let i=0;i<sparkleCount;i++) sparkles.push(makeSparkle());
+
+        function drawHeart(x, y, size, alpha, rot) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(rot);
+          ctx.globalAlpha = alpha;
+          ctx.font = `${Math.floor(size)}px system-ui`;
+          ctx.fillText("❤", -size/2, size/2);
+          ctx.restore();
+        }
+
+        function draw() {
+          if (!running) return;
+
+          ctx.clearRect(0, 0, w, h);
+
+          // subtle vignette
+          ctx.save();
+          const g = ctx.createRadialGradient(w*0.5, h*0.5, 80, w*0.5, h*0.5, Math.max(w,h)*0.65);
+          g.addColorStop(0, "rgba(255,51,102,0.06)");
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(0,0,w,h);
+          ctx.restore();
+
+          // sparkles
+          ctx.save();
+          for (const sp of sparkles) {
+            sp.a += sp.tw;
+            if (sp.a > 0.45 || sp.a < 0.06) sp.tw *= -1;
+            ctx.globalAlpha = sp.a;
+            ctx.beginPath();
+            ctx.arc(sp.x, sp.y, sp.s, 0, Math.PI*2);
+            ctx.fillStyle = "rgba(255,255,255,1)";
+            ctx.fill();
+          }
+          ctx.restore();
+
+          // hearts
+          for (const p of hearts) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.r += 0.002;
+
+            if (p.y > h + 40) { p.y = -40; p.x = rand(0, w); }
+            if (p.x < -50) p.x = w + 50;
+            if (p.x > w + 50) p.x = -50;
+
+            drawHeart(p.x, p.y, p.s, p.a, p.r);
+          }
+
+          rafId = window.requestAnimationFrame(draw);
+        }
+
+        rafId = window.requestAnimationFrame(draw);
+
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            running = false;
+            if (rafId) window.cancelAnimationFrame(rafId);
+          } else {
+            if (!running) {
+              running = true;
+              rafId = window.requestAnimationFrame(draw);
+            }
+          }
+        });
+      }
+
+      /* Kisses: image pop */
+      function setupKisses() {
+        const btn = $("#kissBtn");
+        const container = $("#kissContainer");
+        if (!btn || !container) return;
+
+        btn.addEventListener("click", () => {
+          const total = 20;
+          for (let i = 0; i < total; i++) {
+            setTimeout(() => popKiss(container), i * 170);
+          }
+        });
+
+        function popKiss(containerEl) {
+          const kiss = document.createElement("img");
+          kiss.className = "kissPop";
+          kiss.src = "kissesemoji.png";   // <-- your image
+          kiss.alt = "kiss";
+
+          const x = 10 + Math.random() * 80;
+          const y = 12 + Math.random() * 62;
+
+          const scale = (0.8 + Math.random() * 1.2).toFixed(2); // 0.8–2.0 (nice on phone)
+          const rot = `${Math.floor((Math.random() - 0.5) * 80)}deg`;
+
+          kiss.style.left = `${x}vw`;
+          kiss.style.top = `${y}vh`;
+          kiss.style.setProperty("--scale", scale);
+          kiss.style.setProperty("--rot", rot);
+
+          containerEl.appendChild(kiss);
+          kiss.addEventListener("animationend", () => kiss.remove());
+        }
+      }
+
+      function kissBurst(x, y) {
+        const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) return;
+
+        const count = 18;
+        for (let i=0; i<count; i++) {
+          const el = document.createElement("div");
+          el.textContent = (i % 3 === 0) ? "💖" : "✨";
+          el.style.position = "fixed";
+          el.style.left = x + "px";
+          el.style.top = y + "px";
+          el.style.transform = "translate(-50%,-50%)";
+          el.style.fontSize = (12 + Math.random()*18) + "px";
+          el.style.pointerEvents = "none";
+          el.style.zIndex = "998";
+          el.style.filter = "drop-shadow(0 0 10px rgba(255,51,102,.25))";
+
+          const dx = (Math.random() - 0.5) * 220;
+          const dy = (Math.random() - 0.9) * 220;
+
+          el.animate([
+            { transform: "translate(-50%,-50%) scale(1)", opacity: 1 },
+            { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.7)`, opacity: 0 }
+          ], {
+            duration: 900 + Math.random()*600,
+            easing: "cubic-bezier(.2,.8,.2,1)",
+            fill: "forwards"
+          });
+
+          document.body.appendChild(el);
+          window.setTimeout(() => el.remove(), 1700);
+        }
+      }
+
+      function setupKissBurst() {
+        document.addEventListener("click", (e) => {
+          if (e.target && (e.target.id === "kissBtn" || e.target.id === "noteBtn")) return;
+          kissBurst(e.clientX, e.clientY);
+        }, { passive: true });
+      }
+
+      function setupCursorGlow() {
+        const glow = $("#cursorGlow");
+        if (!glow) return;
+
+        const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduce) { glow.style.display = "none"; return; }
+
+        let lastX = window.innerWidth / 2;
+        let lastY = window.innerHeight / 3;
+
+        function move(x, y){
+          lastX = x; lastY = y;
+          glow.style.left = lastX + "px";
+          glow.style.top = lastY + "px";
+        }
+
+        document.addEventListener("mousemove", (e) => move(e.clientX, e.clientY), { passive: true });
+        move(lastX, lastY);
+      }
+
+      function setupStartButton() {
+        const btn = $("#startBtn");
+        const timeline = $("#timelineHeading");
+        if (!btn || !timeline) return;
+
+        btn.addEventListener("click", () => {
+          timeline.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      function renderStickerGrid() {
+        const grid = document.getElementById("stickerGrid");
+        if (!grid) return;
+
+        const stickers = [
+            "image (3).png",
+            "image (4).png",
+            "image (5).png",
+            
+            "image (8).png",
+        ];
+
+        grid.innerHTML = "";
+
+        stickers.forEach((src, i) => {
+            setTimeout(() => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "";
+            img.style.setProperty("--rot", `${Math.floor((Math.random() - 0.5) * 18)}deg`);
+            grid.appendChild(img);
+            }, i * 180); // one after another
+        });
+        }
+
+
+
+      function init() {
+        setHero();
+        buildCards();
+        revealOnView();
+        startCounters();
+        setupModal();
+        setupKisses();
+        setupKissBurst();
+        setupCursorGlow();
+        setupStartButton();
+        renderStickerGrid();
+
+        const typeEl = $("#typeLine");
+        typeLine(typeEl, CONFIG.typingLine, 22).catch(() => {
+          if (typeEl) typeEl.textContent = CONFIG.typingLine;
+        });
+
+        startCanvasBackground();
+
+        const ending = $("#endingPersonalLine");
+        if (ending) ending.textContent = `I love you, ${CONFIG.girlfriendName}. Today, tomorrow, and all the days after that.`;
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
+```
